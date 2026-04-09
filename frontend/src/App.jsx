@@ -11,6 +11,8 @@ function App() {
   const [selectedResId, setSelectedResId] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
+
+  const [notifications, setNotifications] = useState([])
   
   // Ticket Form State
   const [ticketDesc, setTicketDesc] = useState('')
@@ -23,6 +25,7 @@ function App() {
     axios.get(`${API_BASE}/resources`).then(res => setResources(res.data)).catch(err => console.error(err))
     axios.get(`${API_BASE}/bookings`).then(res => setBookings(res.data)).catch(err => console.error(err))
     axios.get(`${API_BASE}/tickets`).then(res => setTickets(res.data)).catch(err => console.error(err))
+    axios.get('http://localhost:8084/api/notifications/1').then(res => setNotifications(res.data))
   }
 
   useEffect(() => {
@@ -84,6 +87,18 @@ function App() {
   return (
     <div style={{ padding: '40px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f7f6', minHeight: '100vh' }}>
       <h1 style={{ color: '#2c3e50', textAlign: 'center' }}>🎓 Smart Campus Operations Hub</h1>
+
+      {/* NOTIFICATION BOX */}
+      <div style={{ backgroundColor: '#e2e3e5', padding: '15px', borderRadius: '8px', marginBottom: '20px' }}>
+        <strong>Notifications ({notifications.filter(n => !n.isRead).length} new)</strong>
+        <ul style={{ margin: '10px 0 0 0', fontSize: '14px' }}>
+          {notifications.slice(0, 3).map(n => (
+            <li key={n.id} style={{ color: n.isRead ? '#666' : 'blue', fontWeight: n.isRead ? 'normal' : 'bold' }}>
+              {n.message}
+            </li>
+          ))}
+        </ul>
+      </div>
       
       {/* SECTION: BOOKING FORM */}
       <div style={{ backgroundColor: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', marginBottom: '30px' }}>
