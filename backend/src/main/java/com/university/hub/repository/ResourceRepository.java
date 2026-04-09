@@ -1,5 +1,6 @@
 package com.university.hub.repository;
-import com.university.hub.entity.Resource;
+
+import com.university.hub.model.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
