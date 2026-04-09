@@ -46,4 +46,11 @@ public class BookingController {
             return ResponseEntity.status(500).body("Server Error: " + e.getMessage());
         }
     }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Booking> updateStatus(@PathVariable Long id, @RequestParam String status) {
+        Booking booking = bookingRepo.findById(id).orElseThrow();
+        booking.setStatus(status);
+        return ResponseEntity.ok(bookingRepo.save(booking));
+    }
 }
