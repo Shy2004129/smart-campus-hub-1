@@ -1,4 +1,4 @@
-package com.university.hub.entity;
+package com.university.hub.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
