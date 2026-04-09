@@ -17,6 +17,6 @@ jobs:
     - name: Make Maven Wrapper Executable
       run: chmod +x backend/mvnw
     - name: Build Backend
-      run: cd backend && ./mvnw clean package -DskipTests
+      run: cd backend && sh mvnw clean package -DskipTests
     - name: Build Frontend
       run: cd frontend && npm install && npm run build
